@@ -7,7 +7,7 @@
  */
 
 
-#define kCurrentVersionDate "2014-08-19"
+#define kCurrentVersionDate "2014-08-26"
 
 /*	History
 	=======
@@ -152,7 +152,7 @@ defaults write com.apple.xcode PBXCustomTemplateMacroDefinitions '{ORGANIZATIONN
 #define kLengthFlickerTraceInMs 3000
 
 // values in seconds
-#define kSampleIntervalOscilloscopeInMs 0.020
+#define kSampleIntervalOscilloscopeInS 0.025
 #define kSampleIntervalERGInMs 0.001
 
 

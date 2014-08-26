@@ -7,8 +7,9 @@
 @synthesize ergRepeatCount;
 
 
-NSTimer *timer100Hz, *timerAutoRecordStart, *timerUntilExitMeasurement, *timerAutoRecordSave;
+NSTimer *timer100Hz, *timerAutoRecordStart, *timerUntilExitMeasurement, *timerAutoRecordSave, *timerWaitNoOsci;
 NSUInteger autoRepeatCounterAtStart;
+
 
 ///// first the fully private methods
 /////////////////////////////////
@@ -66,9 +67,6 @@ NSUInteger autoRepeatCounterAtStart;
 	ergSaving = [[Saving alloc] init];
 
 	isDoingSweepAcquisition = NO;  doesRecordingNeedSaving = NO;
-	
-	in100Handler = NO;  ergTime = [[NSDate date] retain];
-	timer100Hz = [[NSTimer scheduledTimerWithTimeInterval: kSampleIntervalOscilloscopeInMs target: self selector: @selector(handle100HzTimer:) userInfo: nil repeats: YES] retain];
 
 	window = self.window;
 	window.backgroundColor = [NSColor colorWithDeviceWhite: (CGFloat)0.25 alpha: 1];
@@ -93,6 +91,7 @@ NSUInteger autoRepeatCounterAtStart;
 	[osci setColor: [NSColor colorWithDeviceRed:0.5 green:0 blue:0.0 alpha: 1] forTrace: 1];
 	[osci setColor: NSColor.darkGrayColor forTrace: 2];
 	[osci setBackgroundColor: NSColor.lightGrayColor];
+    [osci setIsShiftTraces: NO];
 	
 	traceOD = [[NSArray array] retain];  traceOS = [[NSArray array] retain];  traceTrigger = [[NSArray array] retain];
 	recInfoDict = [[NSMutableDictionary dictionaryWithCapacity: 20] retain];
@@ -123,12 +122,19 @@ NSUInteger autoRepeatCounterAtStart;
 	}
     [self setAutoRecordRepeatCount: 5]; // should better be read from the stimuli plist
     
+	in100Handler = NO;  ergTime = [[NSDate date] retain];
+	timer100Hz = [[NSTimer scheduledTimerWithTimeInterval: kSampleIntervalOscilloscopeInS target: self selector: @selector(handle100HzTimer:) userInfo: nil repeats: YES] retain];
+    
 #ifdef versionAnimal
     [buttonRetrievePIZ_outlet setEnabled: NO];
     [fieldReferrer setEnabled: NO];
 #endif
     
-    
+    [window makeKeyAndOrderFront: self];
+    [window makeFirstResponder: fieldSubjectName];
+    [fieldSubjectName becomeFirstResponder];
+    [fieldSubjectName setFocusRingType:NSFocusRingTypeDefault];
+
 	//[self setErgState: 10];	// this can help to speed up testing
 	//NSLog(@"%s exit", __PRETTY_FUNCTION__);
 }
@@ -213,35 +219,18 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
-- (void) exitMeasurement: (NSTimer *) timer {   //  NSLog(@"%s", __PRETTY_FUNCTION__);
-	if (timerFlicker != nil) {	// make sure the dispatch timer is stopped
-		dispatch_source_cancel(timerFlicker);  dispatch_release(timerFlicker);  timerFlicker = nil;
-	}
-	isDoingSweepAcquisition = NO;  doesRecordingNeedSaving = YES;
-	traceOD = [ergAmplifier getSweepOfChannel: 1];  traceOS = [ergAmplifier getSweepOfChannel: 2];  traceTrigger = [ergAmplifier getSweepOfChannel: 0];
-	[buttonRecord_outlet setEnabled: NO];  [buttonKeepAndNext_outlet setEnabled: !(([ergSequencer stateInSequence]+1) >= ([ergSequencer numberOfStates]))];  //NSLog(@"gSequenceStep: %d", gSequenceStep);
-	[buttonKeepAndAgain_outlet setEnabled: (ergRepeatCount < (NSUInteger) kMaxRepetitionsPerStimulus)];  
-    [buttonForget_outlet setEnabled: !_isInAutoMode];
-	CGFloat maxValueInTraceBox = [ergAmplifier maxVoltage]/2.0;
-	NSRect coordRect = NSMakeRect(0, -maxValueInTraceBox, ergSequencer.isFlicker ? kLengthFlickerTraceInMs : kLengthNonflickerTraceInMs, 2*maxValueInTraceBox);
-	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OD] setCoords: coordRect andAddTrace: traceOD];
-	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OS] setCoords: coordRect andAddTrace: traceOS];
-	[ergStimulator setFixLED: q450FixLEDNone];
-    [traceOD retain];  [traceOS retain];  [traceTrigger retain];    // if I don't retain here, the instances are gone when trying to save 2013-11-22
-    
-    //[window makeFirstResponder: buttonKeepAndNext_outlet];
+- (void) handleTimerWaitNoOsci: (NSTimer *) timer {
+    [self initMeasurement];
 }
-
-
 - (void) initMeasurement {	//  NSLog(@"%s", __PRETTY_FUNCTION__);
-	[popupSequence_outlet setEnabled: NO];  [buttonRecord_outlet setEnabled: NO];	// no further actions like this
-	isDoingSweepAcquisition = YES;	// tell the oscilloscope to pause
-    NSUInteger waitCounter = 0;
-	while (in100Handler && (++waitCounter<10)) {
-        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.001, false);   // wait
-        NSLog(@"wait in initMeasurement");
+	if (in100Handler) {
+        [timerWaitNoOsci release];
+        NSLog(@"wait in initMeasurement (timered)");
+            timerWaitNoOsci = [[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(handleTimerWaitNoOsci:) userInfo: nil repeats: NO] retain];
+        return;
     }
 	isDoingSweepAcquisition = YES;	// tell the oscilloscope to pause
+	[popupSequence_outlet setEnabled: NO];  [buttonRecord_outlet setEnabled: NO];	// no further actions like this
 	[ergTime release];  ergTime = [[NSDate date] retain];	// time the start
 	CGFloat flashFreq = ergSequencer.flashFrequency;
 	NSUInteger sweepLengthInMs = ergSequencer.isFlicker ? kLengthFlickerTraceInMs : kLengthNonflickerTraceInMs;
@@ -265,6 +254,24 @@ NSUInteger autoRepeatCounterAtStart;
 		dispatch_resume(timerFlicker);
 		timerUntilExitMeasurement = [[NSTimer scheduledTimerWithTimeInterval: 0.2 + nFlashes/flashFreq target: self selector: @selector(exitMeasurement:) userInfo: nil repeats: NO] retain];
 	}
+}
+
+
+- (void) exitMeasurement: (NSTimer *) timer {   //  NSLog(@"%s", __PRETTY_FUNCTION__);
+	if (timerFlicker != nil) {	// make sure the dispatch timer is stopped
+		dispatch_source_cancel(timerFlicker);  dispatch_release(timerFlicker);  timerFlicker = nil;
+	}
+	isDoingSweepAcquisition = NO;  doesRecordingNeedSaving = YES;
+	traceOD = [ergAmplifier getSweepOfChannel: 1];  traceOS = [ergAmplifier getSweepOfChannel: 2];  traceTrigger = [ergAmplifier getSweepOfChannel: 0];
+	[buttonRecord_outlet setEnabled: NO];  [buttonKeepAndNext_outlet setEnabled: !(([ergSequencer stateInSequence]+1) >= ([ergSequencer numberOfStates]))];  //NSLog(@"gSequenceStep: %d", gSequenceStep);
+	[buttonKeepAndAgain_outlet setEnabled: (ergRepeatCount < (NSUInteger) kMaxRepetitionsPerStimulus)];
+    [buttonForget_outlet setEnabled: !_isInAutoMode];
+	CGFloat maxValueInTraceBox = [ergAmplifier maxVoltage]/2.0;
+	NSRect coordRect = NSMakeRect(0, -maxValueInTraceBox, ergSequencer.isFlicker ? kLengthFlickerTraceInMs : kLengthNonflickerTraceInMs, 2*maxValueInTraceBox);
+	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OD] setCoords: coordRect andAddTrace: traceOD];
+	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OS] setCoords: coordRect andAddTrace: traceOS];
+	[ergStimulator setFixLED: q450FixLEDNone];
+    [traceOD retain];  [traceOS retain];  [traceTrigger retain];    // if I don't retain here, the instances are gone when trying to save 2013-11-22
 }
 
 

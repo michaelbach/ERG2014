@@ -16,6 +16,7 @@
 		249619FC18C7475500C7AF5A /* ReferrerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 249619FB18C7475500C7AF5A /* ReferrerNames.m */; };
 		24C3BD370BB271C400557761 /* WndwViewportXform.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C3BD350BB271C400557761 /* WndwViewportXform.m */; };
 		24DE48140BB1296800199E19 /* EDGInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE48120BB1296800199E19 /* EDGInfoPanel.m */; };
+		3E16871619ACE2990092FA2C /* Oscilloscope3.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E16871519ACE2990092FA2C /* Oscilloscope3.m */; };
 		3E9DF6B0112A7DAC00890221 /* flashClick.aif in Resources */ = {isa = PBXBuildFile; fileRef = 3E9DF6AE112A7DAC00890221 /* flashClick.aif */; };
 		3E9DF6B1112A7DAC00890221 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3E9DF6AF112A7DAC00890221 /* Icon.icns */; };
 		8A19D81F0EDBFF4100E44365 /* Sequencer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A19D81E0EDBFF4100E44365 /* Sequencer.mm */; };
@@ -33,7 +34,6 @@
 		8AB5F1A01922131100DF15F0 /* KrzHL7.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A24A5EF112EE45A00AFD968 /* KrzHL7.jar */; };
 		8AB5F1A11922131100DF15F0 /* PDV.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AA4069A0BB130E700081A1D /* PDV.jar */; };
 		8AB5F1A21922131100DF15F0 /* Utils.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AA4069D0BB130E700081A1D /* Utils.jar */; };
-		8AD1ADA81133E48C0049EBF8 /* Oscilloscope2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -91,6 +91,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		3E03D8880FDFA60C000A4E5E /* Camera2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera2.h; path = ../../../../objectiveC_Library/Camera2/Camera2.h; sourceTree = SOURCE_ROOT; };
+		3E16871419ACE2990092FA2C /* Oscilloscope3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Oscilloscope3.h; path = ../../../../objectiveC_Library/Oscilloscope3/Oscilloscope3.h; sourceTree = "<group>"; };
+		3E16871519ACE2990092FA2C /* Oscilloscope3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Oscilloscope3.m; path = ../../../../objectiveC_Library/Oscilloscope3/Oscilloscope3.m; sourceTree = "<group>"; };
 		3E9DF6AE112A7DAC00890221 /* flashClick.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = flashClick.aif; path = Resources/flashClick.aif; sourceTree = "<group>"; };
 		3E9DF6AF112A7DAC00890221 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Icon.icns; path = Resources/Icon.icns; sourceTree = "<group>"; };
 		8A19D81D0EDBFF4100E44365 /* Sequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sequencer.h; sourceTree = "<group>"; };
@@ -118,8 +120,6 @@
 		8AA406960BB130E600081A1D /* DataBaseAccess.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = DataBaseAccess.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/DataBaseAccess.jar; sourceTree = SOURCE_ROOT; };
 		8AA4069A0BB130E700081A1D /* PDV.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = PDV.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/PDV.jar; sourceTree = SOURCE_ROOT; };
 		8AA4069D0BB130E700081A1D /* Utils.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = Utils.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/Utils.jar; sourceTree = SOURCE_ROOT; };
-		8AD1ADA61133E48C0049EBF8 /* Oscilloscope2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oscilloscope2.h; sourceTree = "<group>"; };
-		8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Oscilloscope2.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* ERG2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ERG2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -144,7 +144,7 @@
 				8A20CC9211A274E800ED396D /* Globals.h */,
 				243D7D6618B74F1F00ED1581 /* NIDAQ2 */,
 				243D7D3A18B74F0100ED1581 /* RCAmpNI2 */,
-				8AD1ADA51133E48C0049EBF8 /* Oscilloscope2 */,
+				3E16871719ACE2AB0092FA2C /* Oscilloscope3 */,
 				8A4FB9C811297BF60094DC91 /* Misc */,
 				8A2DE6FF1122DFD7000DF005 /* AbsoluteTimeUtils */,
 				3E03D8850FDFA5F5000A4E5E /* Camera2 */,
@@ -296,6 +296,15 @@
 			name = Camera2;
 			sourceTree = "<group>";
 		};
+		3E16871719ACE2AB0092FA2C /* Oscilloscope3 */ = {
+			isa = PBXGroup;
+			children = (
+				3E16871419ACE2990092FA2C /* Oscilloscope3.h */,
+				3E16871519ACE2990092FA2C /* Oscilloscope3.m */,
+			);
+			name = Oscilloscope3;
+			sourceTree = "<group>";
+		};
 		8A19D81C0EDBFF4100E44365 /* Sequencer */ = {
 			isa = PBXGroup;
 			children = (
@@ -392,16 +401,6 @@
 			path = MainController;
 			sourceTree = "<group>";
 		};
-		8AD1ADA51133E48C0049EBF8 /* Oscilloscope2 */ = {
-			isa = PBXGroup;
-			children = (
-				8AD1ADA61133E48C0049EBF8 /* Oscilloscope2.h */,
-				8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */,
-			);
-			name = Oscilloscope2;
-			path = ../../../../objectiveC_Library/Oscilloscope2;
-			sourceTree = SOURCE_ROOT;
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -480,6 +479,7 @@
 				8A7BFCD90B6A848D00F67A5D /* EDGWaveStats.mm in Sources */,
 				243D7D6218B74F0100ED1581 /* RCAmpNI.m in Sources */,
 				24DE48140BB1296800199E19 /* EDGInfoPanel.m in Sources */,
+				3E16871619ACE2990092FA2C /* Oscilloscope3.m in Sources */,
 				8AA4065D0BB12FA900081A1D /* PIZ2Patient.m in Sources */,
 				24C3BD370BB271C400557761 /* WndwViewportXform.m in Sources */,
 				8A19D81F0EDBFF4100E44365 /* Sequencer.mm in Sources */,
@@ -487,7 +487,6 @@
 				243D7D6C18B74F1F00ED1581 /* NIDAQX.m in Sources */,
 				8A4FB9B911297B290094DC91 /* Misc.m in Sources */,
 				247EA40A1921F874006C7733 /* Q450Stim.mm in Sources */,
-				8AD1ADA81133E48C0049EBF8 /* Oscilloscope2.mm in Sources */,
 				8A2557FF11AAE2C20073D72D /* TraceBox2.mm in Sources */,
 				247EA45C1921F8EA006C7733 /* EDGSerial.m in Sources */,
 				0052D08D183E719900CCDC90 /* Camera2.mm in Sources */,

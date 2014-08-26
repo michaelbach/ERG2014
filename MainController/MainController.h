@@ -5,7 +5,7 @@
 //
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTkit.h>
-#import "Oscilloscope2.h"
+#import "Oscilloscope3.h"
 #import "Q450Stim.h"
 #import "RCAmpNI.h"
 #import "TraceBox2.h"
@@ -23,7 +23,7 @@
 
 @interface MainController: NSWindowController {
 	IBOutlet NSWindow *window;
-	IBOutlet Oscilloscope2 *osci;
+	IBOutlet Oscilloscope3 *osci;
 	IBOutlet NSTextField *fieldSubjectName, *fieldSubjectPIZ, *fieldERGNumber;
 	IBOutlet NSDatePicker *dateFieldBirthDate;
 	IBOutlet NSTextFieldCell *fieldAcuityOD, *fieldAcuityOS;
@@ -35,11 +35,11 @@
 	IBOutlet QTCaptureView	*mCaptureView;	// VideoIn -> View
 	Camera2* camera;
 	
-	IBOutlet NSButton *buttonRecord_outlet, *buttonKeepAndNext_outlet, *buttonKeepAndAgain_outlet, *buttonForget_outlet, 
-		*buttonRetrievePIZ_outlet, *buttonAmpInput_outlet, *buttonAmpCal_outlet, *buttonAutoRecordStart_outlet, *buttonAutoRecordStop_outlet;
+	IBOutlet NSButton *buttonRecord_outlet, *buttonKeepAndNext_outlet, *buttonKeepAndAgain_outlet,
+        *buttonForget_outlet, *buttonRetrievePIZ_outlet, *buttonAmpInput_outlet, *buttonAmpCal_outlet,
+        *buttonAutoRecordStart_outlet, *buttonAutoRecordStop_outlet, *checkboxInfraredOn_outlet;
 	IBOutlet NSPopUpButton* popupSequence_outlet;
 	IBOutlet NSBox *boxAutoRecordFrame_outlet;
-	IBOutlet NSButton *checkboxInfraredOn_outlet;
 	
 	NSUInteger epNum, ergRepeatCount, autoRecordRepeatCount, ergState;
 	BOOL isDoingSweepAcquisition, doesRecordingNeedSaving, in100Handler, _isMenuBarVisible, _isAutoHideOtherApplications, _isInAutoMode;

@@ -563,7 +563,7 @@ DQ
                             <rect key="frame" x="2" y="2" width="484" height="394"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <customView toolTip="Live ERG trace (oscilloscope)" id="1200" customClass="Oscilloscope2">
+                                <customView toolTip="Live ERG trace (oscilloscope)" id="1200" customClass="Oscilloscope3">
                                     <rect key="frame" x="8" y="10" width="468" height="378"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </customView>
