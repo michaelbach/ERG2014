@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0052D08D183E719900CCDC90 /* Camera2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 0052D08C183E719900CCDC90 /* Camera2.mm */; };
+		242E534E18B762C500400408 /* nidaqmxbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242E534D18B762C500400408 /* nidaqmxbase.framework */; };
+		243D7D6218B74F0100ED1581 /* RCAmpNI.m in Sources */ = {isa = PBXBuildFile; fileRef = 243D7D5418B74F0100ED1581 /* RCAmpNI.m */; };
+		243D7D6C18B74F1F00ED1581 /* NIDAQX.m in Sources */ = {isa = PBXBuildFile; fileRef = 243D7D6918B74F1F00ED1581 /* NIDAQX.m */; };
+		247EA40A1921F874006C7733 /* Q450Stim.mm in Sources */ = {isa = PBXBuildFile; fileRef = 247EA3FD1921F874006C7733 /* Q450Stim.mm */; };
+		247EA45C1921F8EA006C7733 /* EDGSerial.m in Sources */ = {isa = PBXBuildFile; fileRef = 247EA4591921F8EA006C7733 /* EDGSerial.m */; };
+		249619FC18C7475500C7AF5A /* ReferrerNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 249619FB18C7475500C7AF5A /* ReferrerNames.m */; };
+		24C3BD370BB271C400557761 /* WndwViewportXform.m in Sources */ = {isa = PBXBuildFile; fileRef = 24C3BD350BB271C400557761 /* WndwViewportXform.m */; };
+		24DE48140BB1296800199E19 /* EDGInfoPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE48120BB1296800199E19 /* EDGInfoPanel.m */; };
+		3E9DF6B0112A7DAC00890221 /* flashClick.aif in Resources */ = {isa = PBXBuildFile; fileRef = 3E9DF6AE112A7DAC00890221 /* flashClick.aif */; };
+		3E9DF6B1112A7DAC00890221 /* Icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3E9DF6AF112A7DAC00890221 /* Icon.icns */; };
+		8A19D81F0EDBFF4100E44365 /* Sequencer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A19D81E0EDBFF4100E44365 /* Sequencer.mm */; };
+		8A23D7820B3D796A0000EA0D /* MainController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A23D7810B3D796A0000EA0D /* MainController.mm */; };
+		8A2557FF11AAE2C20073D72D /* TraceBox2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A2557FD11AAE2C20073D72D /* TraceBox2.mm */; };
+		8A2DE7021122DFD7000DF005 /* AbsoluteTimeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A2DE7011122DFD7000DF005 /* AbsoluteTimeUtils.m */; };
+		8A44FA6F0D98365800106048 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A44FA6E0D98365800106048 /* QTKit.framework */; };
+		8A4FB9B911297B290094DC91 /* Misc.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A4FB9B811297B290094DC91 /* Misc.m */; };
+		8A68635A0B511078002FA1E6 /* Saving.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A6863590B511078002FA1E6 /* Saving.mm */; };
+		8A7BFCD90B6A848D00F67A5D /* EDGWaveStats.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BFCD70B6A848D00F67A5D /* EDGWaveStats.mm */; };
+		8A9B74900B5A354B009364EA /* PrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9B748F0B5A354B009364EA /* PrefsController.m */; };
+		8AA4065D0BB12FA900081A1D /* PIZ2Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA406500BB12FA900081A1D /* PIZ2Patient.m */; };
+		8AB5F19D192212D900DF15F0 /* PIZ2Pat.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4FC77B112EDB7C0071472A /* PIZ2Pat.jar */; };
+		8AB5F19F1922131100DF15F0 /* DataBaseAccess.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AA406960BB130E600081A1D /* DataBaseAccess.jar */; };
+		8AB5F1A01922131100DF15F0 /* KrzHL7.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A24A5EF112EE45A00AFD968 /* KrzHL7.jar */; };
+		8AB5F1A11922131100DF15F0 /* PDV.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AA4069A0BB130E700081A1D /* PDV.jar */; };
+		8AB5F1A21922131100DF15F0 /* Utils.jar in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AA4069D0BB130E700081A1D /* Utils.jar */; };
+		8AD1ADA81133E48C0049EBF8 /* Oscilloscope2.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */; };
+		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8AB5F19C192212C600DF15F0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				8AB5F19D192212D900DF15F0 /* PIZ2Pat.jar in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AB5F19E1922130100DF15F0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = lib;
+			dstSubfolderSpec = 7;
+			files = (
+				8AB5F19F1922131100DF15F0 /* DataBaseAccess.jar in CopyFiles */,
+				8AB5F1A01922131100DF15F0 /* KrzHL7.jar in CopyFiles */,
+				8AB5F1A11922131100DF15F0 /* PDV.jar in CopyFiles */,
+				8AB5F1A21922131100DF15F0 /* Utils.jar in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0052D08C183E719900CCDC90 /* Camera2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Camera2.mm; path = ../../../../objectiveC_Library/Camera2/Camera2.mm; sourceTree = "<group>"; };
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		242E534D18B762C500400408 /* nidaqmxbase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = nidaqmxbase.framework; path = /Library/Frameworks/nidaqmxbase.framework; sourceTree = "<absolute>"; };
+		243D7D5318B74F0100ED1581 /* RCAmpNI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCAmpNI.h; sourceTree = "<group>"; };
+		243D7D5418B74F0100ED1581 /* RCAmpNI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCAmpNI.m; sourceTree = "<group>"; };
+		243D7D6718B74F1F00ED1581 /* NIDAQmxBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDAQmxBase.h; sourceTree = "<group>"; };
+		243D7D6818B74F1F00ED1581 /* NIDAQX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NIDAQX.h; sourceTree = "<group>"; };
+		243D7D6918B74F1F00ED1581 /* NIDAQX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NIDAQX.m; sourceTree = "<group>"; };
+		247EA3FC1921F874006C7733 /* Q450Stim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Q450Stim.h; sourceTree = "<group>"; };
+		247EA3FD1921F874006C7733 /* Q450Stim.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Q450Stim.mm; sourceTree = "<group>"; };
+		247EA4581921F8EA006C7733 /* EDGSerial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDGSerial.h; sourceTree = "<group>"; };
+		247EA4591921F8EA006C7733 /* EDGSerial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDGSerial.m; sourceTree = "<group>"; };
+		249619FA18C7475500C7AF5A /* ReferrerNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferrerNames.h; sourceTree = "<group>"; };
+		249619FB18C7475500C7AF5A /* ReferrerNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferrerNames.m; sourceTree = "<group>"; };
+		24C3BD340BB271C400557761 /* WndwViewportXform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WndwViewportXform.h; sourceTree = "<group>"; };
+		24C3BD350BB271C400557761 /* WndwViewportXform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WndwViewportXform.m; sourceTree = "<group>"; };
+		24DE48110BB1296800199E19 /* EDGInfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDGInfoPanel.h; sourceTree = "<group>"; };
+		24DE48120BB1296800199E19 /* EDGInfoPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EDGInfoPanel.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97319FDCFA39411CA2CEA /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		3E03D8880FDFA60C000A4E5E /* Camera2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera2.h; path = ../../../../objectiveC_Library/Camera2/Camera2.h; sourceTree = SOURCE_ROOT; };
+		3E9DF6AE112A7DAC00890221 /* flashClick.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = flashClick.aif; path = Resources/flashClick.aif; sourceTree = "<group>"; };
+		3E9DF6AF112A7DAC00890221 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Icon.icns; path = Resources/Icon.icns; sourceTree = "<group>"; };
+		8A19D81D0EDBFF4100E44365 /* Sequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sequencer.h; sourceTree = "<group>"; };
+		8A19D81E0EDBFF4100E44365 /* Sequencer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sequencer.mm; sourceTree = "<group>"; };
+		8A20CC9211A274E800ED396D /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Globals.h; sourceTree = "<group>"; };
+		8A23D7800B3D796A0000EA0D /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		8A23D7810B3D796A0000EA0D /* MainController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainController.mm; sourceTree = "<group>"; };
+		8A24A5EF112EE45A00AFD968 /* KrzHL7.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = KrzHL7.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/KrzHL7.jar; sourceTree = SOURCE_ROOT; };
+		8A2557FC11AAE2C20073D72D /* TraceBox2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceBox2.h; sourceTree = "<group>"; };
+		8A2557FD11AAE2C20073D72D /* TraceBox2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TraceBox2.mm; sourceTree = "<group>"; };
+		8A2DE7001122DFD7000DF005 /* AbsoluteTimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbsoluteTimeUtils.h; sourceTree = "<group>"; };
+		8A2DE7011122DFD7000DF005 /* AbsoluteTimeUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbsoluteTimeUtils.m; sourceTree = "<group>"; };
+		8A44FA6E0D98365800106048 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		8A4FB9B711297B290094DC91 /* Misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Misc.h; path = Misc/Misc.h; sourceTree = "<group>"; };
+		8A4FB9B811297B290094DC91 /* Misc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Misc.m; path = Misc/Misc.m; sourceTree = "<group>"; };
+		8A4FC77B112EDB7C0071472A /* PIZ2Pat.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = PIZ2Pat.jar; path = ../../../../objectiveC_Library/PIZ2Patient/PIZ2Pat.jar; sourceTree = SOURCE_ROOT; };
+		8A6863580B511078002FA1E6 /* Saving.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Saving.h; path = Saving/Saving.h; sourceTree = "<group>"; };
+		8A6863590B511078002FA1E6 /* Saving.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Saving.mm; path = Saving/Saving.mm; sourceTree = "<group>"; };
+		8A7BFCD60B6A848D00F67A5D /* EDGWaveStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EDGWaveStats.h; sourceTree = "<group>"; };
+		8A7BFCD70B6A848D00F67A5D /* EDGWaveStats.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EDGWaveStats.mm; sourceTree = "<group>"; };
+		8A9B748E0B5A354B009364EA /* PrefsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefsController.h; path = PrefsController/PrefsController.h; sourceTree = "<group>"; };
+		8A9B748F0B5A354B009364EA /* PrefsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PrefsController.m; path = PrefsController/PrefsController.m; sourceTree = "<group>"; };
+		8AA4064F0BB12FA900081A1D /* PIZ2Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIZ2Patient.h; sourceTree = "<group>"; };
+		8AA406500BB12FA900081A1D /* PIZ2Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIZ2Patient.m; sourceTree = "<group>"; };
+		8AA406960BB130E600081A1D /* DataBaseAccess.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = DataBaseAccess.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/DataBaseAccess.jar; sourceTree = SOURCE_ROOT; };
+		8AA4069A0BB130E700081A1D /* PDV.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = PDV.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/PDV.jar; sourceTree = SOURCE_ROOT; };
+		8AA4069D0BB130E700081A1D /* Utils.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; name = Utils.jar; path = ../../../../objectiveC_Library/PIZ2Patient/lib/Utils.jar; sourceTree = SOURCE_ROOT; };
+		8AD1ADA61133E48C0049EBF8 /* Oscilloscope2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oscilloscope2.h; sourceTree = "<group>"; };
+		8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Oscilloscope2.mm; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* ERG2014.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ERG2014.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				242E534E18B762C500400408 /* nidaqmxbase.framework in Frameworks */,
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				8A44FA6F0D98365800106048 /* QTKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8A20CC9211A274E800ED396D /* Globals.h */,
+				243D7D6618B74F1F00ED1581 /* NIDAQ2 */,
+				243D7D3A18B74F0100ED1581 /* RCAmpNI2 */,
+				8AD1ADA51133E48C0049EBF8 /* Oscilloscope2 */,
+				8A4FB9C811297BF60094DC91 /* Misc */,
+				8A2DE6FF1122DFD7000DF005 /* AbsoluteTimeUtils */,
+				3E03D8850FDFA5F5000A4E5E /* Camera2 */,
+				24DE48100BB1296800199E19 /* EDGInfoPanel */,
+				247EA4561921F8EA006C7733 /* EDGSerial2014 */,
+				247EA3E91921F874006C7733 /* Q450Stim2014 */,
+				249619F918C7475500C7AF5A /* ReferrerNames */,
+				8AA406430BB12FA900081A1D /* PIZ2Patient */,
+				8A7BFCD50B6A848D00F67A5D /* EDGWaveStats */,
+				8A9B74920B5A3562009364EA /* PrefsController */,
+				8A6863570B511053002FA1E6 /* Saving */,
+				8A2557FB11AAE2C20073D72D /* TraceBox2 */,
+				8A19D81C0EDBFF4100E44365 /* Sequencer */,
+				8A23D77F0B3D796A0000EA0D /* MainController */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* ERG2014.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		243D7D3A18B74F0100ED1581 /* RCAmpNI2 */ = {
+			isa = PBXGroup;
+			children = (
+				243D7D5318B74F0100ED1581 /* RCAmpNI.h */,
+				243D7D5418B74F0100ED1581 /* RCAmpNI.m */,
+			);
+			name = RCAmpNI2;
+			path = ../../../../objectiveC_Library/RCAmpNI2;
+			sourceTree = "<group>";
+		};
+		243D7D6618B74F1F00ED1581 /* NIDAQ2 */ = {
+			isa = PBXGroup;
+			children = (
+				243D7D6718B74F1F00ED1581 /* NIDAQmxBase.h */,
+				243D7D6818B74F1F00ED1581 /* NIDAQX.h */,
+				243D7D6918B74F1F00ED1581 /* NIDAQX.m */,
+			);
+			name = NIDAQ2;
+			path = ../../../../objectiveC_Library/NIDAQ2;
+			sourceTree = "<group>";
+		};
+		247EA3E91921F874006C7733 /* Q450Stim2014 */ = {
+			isa = PBXGroup;
+			children = (
+				247EA3FC1921F874006C7733 /* Q450Stim.h */,
+				247EA3FD1921F874006C7733 /* Q450Stim.mm */,
+			);
+			name = Q450Stim2014;
+			path = ../../../../objectiveC_Library/Q450Stim2014;
+			sourceTree = "<group>";
+		};
+		247EA4561921F8EA006C7733 /* EDGSerial2014 */ = {
+			isa = PBXGroup;
+			children = (
+				247EA4581921F8EA006C7733 /* EDGSerial.h */,
+				247EA4591921F8EA006C7733 /* EDGSerial.m */,
+			);
+			name = EDGSerial2014;
+			path = ../../../../objectiveC_Library/EDGSerial2014;
+			sourceTree = "<group>";
+		};
+		249619F918C7475500C7AF5A /* ReferrerNames */ = {
+			isa = PBXGroup;
+			children = (
+				249619FA18C7475500C7AF5A /* ReferrerNames.h */,
+				249619FB18C7475500C7AF5A /* ReferrerNames.m */,
+			);
+			path = ReferrerNames;
+			sourceTree = "<group>";
+		};
+		24C3BD330BB271C400557761 /* WndwViewportXform */ = {
+			isa = PBXGroup;
+			children = (
+				24C3BD340BB271C400557761 /* WndwViewportXform.h */,
+				24C3BD350BB271C400557761 /* WndwViewportXform.m */,
+			);
+			name = WndwViewportXform;
+			path = ../../../../objectiveC_Library/WndwViewportXform;
+			sourceTree = SOURCE_ROOT;
+		};
+		24DE48100BB1296800199E19 /* EDGInfoPanel */ = {
+			isa = PBXGroup;
+			children = (
+				24DE48110BB1296800199E19 /* EDGInfoPanel.h */,
+				24DE48120BB1296800199E19 /* EDGInfoPanel.m */,
+			);
+			name = EDGInfoPanel;
+			path = ../../../../objectiveC_Library/EDGInfoPanel;
+			sourceTree = SOURCE_ROOT;
+		};
+		29B97314FDCFA39411CA2CEA /* ERG */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = ERG;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3E9DF6AE112A7DAC00890221 /* flashClick.aif */,
+				3E9DF6AF112A7DAC00890221 /* Icon.icns */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				29B97318FDCFA39411CA2CEA /* MainMenu.nib */,
+				8A4FC77B112EDB7C0071472A /* PIZ2Pat.jar */,
+				8AA406B90BB1312400081A1D /* lib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+				8A44FA6E0D98365800106048 /* QTKit.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				242E534D18B762C500400408 /* nidaqmxbase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3E03D8850FDFA5F5000A4E5E /* Camera2 */ = {
+			isa = PBXGroup;
+			children = (
+				3E03D8880FDFA60C000A4E5E /* Camera2.h */,
+				0052D08C183E719900CCDC90 /* Camera2.mm */,
+			);
+			name = Camera2;
+			sourceTree = "<group>";
+		};
+		8A19D81C0EDBFF4100E44365 /* Sequencer */ = {
+			isa = PBXGroup;
+			children = (
+				8A19D81D0EDBFF4100E44365 /* Sequencer.h */,
+				8A19D81E0EDBFF4100E44365 /* Sequencer.mm */,
+			);
+			path = Sequencer;
+			sourceTree = "<group>";
+		};
+		8A23D77F0B3D796A0000EA0D /* MainController */ = {
+			isa = PBXGroup;
+			children = (
+				8A23D7800B3D796A0000EA0D /* MainController.h */,
+				8A23D7810B3D796A0000EA0D /* MainController.mm */,
+			);
+			path = MainController;
+			sourceTree = "<group>";
+		};
+		8A2557FB11AAE2C20073D72D /* TraceBox2 */ = {
+			isa = PBXGroup;
+			children = (
+				24C3BD330BB271C400557761 /* WndwViewportXform */,
+				8A2557FC11AAE2C20073D72D /* TraceBox2.h */,
+				8A2557FD11AAE2C20073D72D /* TraceBox2.mm */,
+			);
+			path = TraceBox2;
+			sourceTree = "<group>";
+		};
+		8A2DE6FF1122DFD7000DF005 /* AbsoluteTimeUtils */ = {
+			isa = PBXGroup;
+			children = (
+				8A2DE7001122DFD7000DF005 /* AbsoluteTimeUtils.h */,
+				8A2DE7011122DFD7000DF005 /* AbsoluteTimeUtils.m */,
+			);
+			name = AbsoluteTimeUtils;
+			path = ../../../../objectiveC_Library/AbsoluteTimeUtils;
+			sourceTree = SOURCE_ROOT;
+		};
+		8A4FB9C811297BF60094DC91 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				8A4FB9B711297B290094DC91 /* Misc.h */,
+				8A4FB9B811297B290094DC91 /* Misc.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		8A6863570B511053002FA1E6 /* Saving */ = {
+			isa = PBXGroup;
+			children = (
+				8A6863580B511078002FA1E6 /* Saving.h */,
+				8A6863590B511078002FA1E6 /* Saving.mm */,
+			);
+			name = Saving;
+			sourceTree = "<group>";
+		};
+		8A7BFCD50B6A848D00F67A5D /* EDGWaveStats */ = {
+			isa = PBXGroup;
+			children = (
+				8A7BFCD60B6A848D00F67A5D /* EDGWaveStats.h */,
+				8A7BFCD70B6A848D00F67A5D /* EDGWaveStats.mm */,
+			);
+			path = EDGWaveStats;
+			sourceTree = "<group>";
+		};
+		8A9B74920B5A3562009364EA /* PrefsController */ = {
+			isa = PBXGroup;
+			children = (
+				8A9B748E0B5A354B009364EA /* PrefsController.h */,
+				8A9B748F0B5A354B009364EA /* PrefsController.m */,
+			);
+			name = PrefsController;
+			sourceTree = "<group>";
+		};
+		8AA406430BB12FA900081A1D /* PIZ2Patient */ = {
+			isa = PBXGroup;
+			children = (
+				8AA4064F0BB12FA900081A1D /* PIZ2Patient.h */,
+				8AA406500BB12FA900081A1D /* PIZ2Patient.m */,
+			);
+			name = PIZ2Patient;
+			path = ../../../../objectiveC_Library/PIZ2Patient;
+			sourceTree = SOURCE_ROOT;
+		};
+		8AA406B90BB1312400081A1D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				8AA406960BB130E600081A1D /* DataBaseAccess.jar */,
+				8A24A5EF112EE45A00AFD968 /* KrzHL7.jar */,
+				8AA4069A0BB130E700081A1D /* PDV.jar */,
+				8AA4069D0BB130E700081A1D /* Utils.jar */,
+			);
+			name = lib;
+			path = MainController;
+			sourceTree = "<group>";
+		};
+		8AD1ADA51133E48C0049EBF8 /* Oscilloscope2 */ = {
+			isa = PBXGroup;
+			children = (
+				8AD1ADA61133E48C0049EBF8 /* Oscilloscope2.h */,
+				8AD1ADA71133E48C0049EBF8 /* Oscilloscope2.mm */,
+			);
+			name = Oscilloscope2;
+			path = ../../../../objectiveC_Library/Oscilloscope2;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* ERG2014 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "ERG2014" */;
+			buildPhases = (
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8AB5F19C192212C600DF15F0 /* CopyFiles */,
+				8AB5F19E1922130100DF15F0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ERG2014;
+			productInstallPath = "$(HOME)/Applications";
+			productName = ERG;
+			productReference = 8D1107320486CEB800E47090 /* ERG2014.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ERG2014" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* ERG */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* ERG2014 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */,
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				3E9DF6B0112A7DAC00890221 /* flashClick.aif in Resources */,
+				3E9DF6B1112A7DAC00890221 /* Icon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				8A23D7820B3D796A0000EA0D /* MainController.mm in Sources */,
+				8A68635A0B511078002FA1E6 /* Saving.mm in Sources */,
+				8A9B74900B5A354B009364EA /* PrefsController.m in Sources */,
+				249619FC18C7475500C7AF5A /* ReferrerNames.m in Sources */,
+				8A7BFCD90B6A848D00F67A5D /* EDGWaveStats.mm in Sources */,
+				243D7D6218B74F0100ED1581 /* RCAmpNI.m in Sources */,
+				24DE48140BB1296800199E19 /* EDGInfoPanel.m in Sources */,
+				8AA4065D0BB12FA900081A1D /* PIZ2Patient.m in Sources */,
+				24C3BD370BB271C400557761 /* WndwViewportXform.m in Sources */,
+				8A19D81F0EDBFF4100E44365 /* Sequencer.mm in Sources */,
+				8A2DE7021122DFD7000DF005 /* AbsoluteTimeUtils.m in Sources */,
+				243D7D6C18B74F1F00ED1581 /* NIDAQX.m in Sources */,
+				8A4FB9B911297B290094DC91 /* Misc.m in Sources */,
+				247EA40A1921F874006C7733 /* Q450Stim.mm in Sources */,
+				8AD1ADA81133E48C0049EBF8 /* Oscilloscope2.mm in Sources */,
+				8A2557FF11AAE2C20073D72D /* TraceBox2.mm in Sources */,
+				247EA45C1921F8EA006C7733 /* EDGSerial.m in Sources */,
+				0052D08D183E719900CCDC90 /* Camera2.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		29B97318FDCFA39411CA2CEA /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29B97319FDCFA39411CA2CEA /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = ERG2014;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = ERG2014;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = macosx10.8;
+				VALID_ARCHS = i386;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DEAD_CODE_STRIPPING = YES;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_PREFIX_HEADER = "$(inherited)";
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
+				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = macosx10.8;
+				VALID_ARCHS = i386;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "ERG2014" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "ERG2014" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
