@@ -7,7 +7,8 @@
 @synthesize ergRepeatCount;
 
 
-NSTimer *timer100Hz, *timerAutoRecordStart, *timerUntilExitMeasurement, *timerAutoRecordSave, *timerWaitNoOsci;
+NSTimer *timer100Hz, *timerUntilExitMeasurement, *timerWaitNoOsci,
+        *timerAutoRecordStart, *timerAutoRecordSave, *timerAutoRecordDone;
 NSUInteger autoRepeatCounterAtStart;
 
 
@@ -86,7 +87,7 @@ NSUInteger autoRepeatCounterAtStart;
     }
 
 	[osci setNumberOfTraces: 3];
-	[osci setFullscale: 0.95 * [ergAmplifier maxVoltage]];
+	[osci setFullscale: 0.74 * [ergAmplifier maxVoltage]];
 	[osci setColor: [NSColor colorWithDeviceRed:0 green:0 blue:0.5 alpha: 1] forTrace: 0];
 	[osci setColor: [NSColor colorWithDeviceRed:0.5 green:0 blue:0.0 alpha: 1] forTrace: 1];
 	[osci setColor: NSColor.darkGrayColor forTrace: 2];
@@ -266,7 +267,7 @@ NSUInteger autoRepeatCounterAtStart;
 	[buttonRecord_outlet setEnabled: NO];  [buttonKeepAndNext_outlet setEnabled: !(([ergSequencer stateInSequence]+1) >= ([ergSequencer numberOfStates]))];  //NSLog(@"gSequenceStep: %d", gSequenceStep);
 	[buttonKeepAndAgain_outlet setEnabled: (ergRepeatCount < (NSUInteger) kMaxRepetitionsPerStimulus)];
     [buttonForget_outlet setEnabled: !_isInAutoMode];
-	CGFloat maxValueInTraceBox = [ergAmplifier maxVoltage]/2.0;
+	CGFloat maxValueInTraceBox = [ergAmplifier maxVoltage]/3.0;// 3.0 was 2.0 2014-08-28 mb
 	NSRect coordRect = NSMakeRect(0, -maxValueInTraceBox, ergSequencer.isFlicker ? kLengthFlickerTraceInMs : kLengthNonflickerTraceInMs, 2*maxValueInTraceBox);
 	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OD] setCoords: coordRect andAddTrace: traceOD];
 	[self tellTracebox: [self getTraceBoxOfState: ergSequencer.stateInSequence andEye: OS] setCoords: coordRect andAddTrace: traceOS];
@@ -346,6 +347,8 @@ NSUInteger autoRepeatCounterAtStart;
 	[self setAutoStateAndButtons: NO];
 	[timerAutoRecordStart invalidate];  [timerAutoRecordSave invalidate];
     [self setAutoRecordRepeatCount: autoRepeatCounterAtStart];
+    [ergStimulator doBeep]; // indicate we're done
+    timerAutoRecordDone = [[NSTimer scheduledTimerWithTimeInterval: 1.0 target: self selector: @selector(buttonKeepAndNext:) userInfo: nil repeats: NO] retain];
 }
 - (void) handleAutoRecordTimerSaving: (NSTimer *) timer {
 	if (!_isInAutoMode)  {
