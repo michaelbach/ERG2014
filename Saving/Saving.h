@@ -15,10 +15,15 @@
 
 
 @interface Saving : NSObject {
+    float amplificationFactor;
 }
 
 - (void) saveTracesOD: (NSArray *) traceOD andOS: (NSArray *) traceOS andFlash: (NSArray *) traceFlash andDict: (NSDictionary *) dict;
 
 - (void) test1id: (id) owner;
-	
+
+
+@property (assign) float amplificationFactor;
+
+
 @end

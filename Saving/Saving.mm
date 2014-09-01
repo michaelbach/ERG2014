@@ -12,6 +12,9 @@
 @implementation Saving
 
 
+@synthesize amplificationFactor;
+
+
 ///// first internal-only functions
 - (NSString *) composeWaveNameFromBlockNum: (int) blk andStimNum: (int) stm andChannel: (int) chn { //	ERG2007>Saving>NSLog(@"composeWaveNameWithBlockNum");
 	NSMutableString *s = [NSMutableString stringWithString: @"bloc"];
@@ -105,7 +108,7 @@
 		[ergFileString appendString: [waveNameArray objectAtIndex: i]];  [ergFileString appendString: @" "];
 	}
 	[ergFileString appendString: @"\nBEGIN\n"];
-	CGFloat scaleFactor = 1.0 / [[d objectForKey: @kKeyAmplificationFactor] floatValue];
+	CGFloat scaleFactor = 1.0 / [self amplificationFactor];//[[d objectForKey: @kKeyAmplificationFactor] floatValue];
 	for (NSUInteger i=0; i<tOD.count; ++i) {
 		[ergFileString appendFormat: @"%.3e\t", [[tOD objectAtIndex: i] floatValue] * scaleFactor];
 #ifdef versionTinaTsai

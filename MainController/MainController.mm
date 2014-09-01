@@ -321,7 +321,8 @@ NSUInteger autoRepeatCounterAtStart;
 	[recInfoDict setObject: [NSNumber numberWithFloat: ergStimulator.backgroundInCdPerMetersquare] forKey: @kKeyBackgroundLuminance];
 	[recInfoDict setObject: ergStimulator.backgroundColor forKey: @kKeyBackgroundColor];
 
-    [recInfoDict setObject: [NSNumber numberWithFloat: prefsController.amplificationFactor] forKey: @kKeyAmplificationFactor];
+    [ergSaving setAmplificationFactor: [prefsController amplificationFactor]];
+//    [recInfoDict setObject: [NSNumber numberWithFloat: prefsController.amplificationFactor] forKey: @kKeyAmplificationFactor];
 	[recInfoDict setObject: [NSNumber numberWithBool: [ergAmplifier isHardwareOk]] forKey: @kKeyisHardwareOk];
 
 	[ergSaving saveTracesOD: traceOD andOS: traceOS andFlash: traceTrigger andDict: recInfoDict];
