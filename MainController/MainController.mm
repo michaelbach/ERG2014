@@ -50,6 +50,7 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
+#pragma mark awake + init
 - (void) awakeFromNib {	//NSLog(@"%s", __PRETTY_FUNCTION__);
 	[NSApp setDelegate: self];
     [self setMenuBarVisible: prefsController.menuBarVisible];
@@ -141,7 +142,7 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
-// Combo box data source methods ============================
+#pragma mark Combo box data source methods BEGIN ============================
 - (NSUInteger)numberOfItemsInComboBox: (NSComboBox *)aComboBox {
     return [referrerNames numberOfItemsInComboBox];
 }
@@ -153,7 +154,8 @@ NSUInteger autoRepeatCounterAtStart;
 }
 - (NSString *)comboBox: (NSComboBox *)aComboBox completedString: (NSString *)inputString {
     return [referrerNames completedString: inputString];
-}// ==========================================================
+}
+#pragma mark Combo box data source methods END ============================
 
 
 // NSWindow delegate
@@ -220,6 +222,7 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
+#pragma mark Measurement
 - (void) handleTimerWaitNoOsci: (NSTimer *) timer {
     [self initMeasurement];
 }
@@ -276,6 +279,7 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
+#pragma mark Traceboxes
 - (TraceBox2 *) getTraceBoxOfState: (NSUInteger) theState andEye: (EyeCode) theEye {
 	if (theState >= [ergSequencer numberOfStates]) return nil;
 	if ([[traceBoxesOD objectAtIndex:theState] isEqual: @"notInitialised"]) {
@@ -290,6 +294,7 @@ NSUInteger autoRepeatCounterAtStart;
 }
 
 
+# pragma mark Saving
 - (void) saveMeasurement {	//NSLog(@"%s", __PRETTY_FUNCTION__);
 	if (!doesRecordingNeedSaving) return;
 	
@@ -331,7 +336,7 @@ NSUInteger autoRepeatCounterAtStart;
 
 
 
-///////////////////////////// automatic repeats BEGIN
+#pragma mark automatic repeats BEGIN
 - (void) setAutoStateAndButtons: (BOOL) toAutoMode {
 	_isInAutoMode = toAutoMode;
 	if (_isInAutoMode) {
@@ -388,7 +393,7 @@ NSUInteger autoRepeatCounterAtStart;
 ///////////////////////////// automatic repeats END
 
 
-///////////////////////////// deal with all other buttons BEGIN
+#pragma mark deal with all other buttons BEGIN
 - (IBAction) buttonRecord:(id)sender {
 	if (!_isInAutoMode) [self initMeasurement];
 }
@@ -503,7 +508,25 @@ NSUInteger autoRepeatCounterAtStart;
 - (BOOL) acceptsFirstResponder { return YES; }
 
 
-////////////////// Termination stuff //////////////////////
+- (void) setMenuBarVisible: (BOOL) theState {
+	_isMenuBarVisible = theState;
+	[prefsController setMenuBarVisible: theState];
+	[NSMenu setMenuBarVisible: theState];  [window setFrameTopLeftPoint: NSMakePoint(0, 9999)];
+}
+
+- (void) setAutoHideOtherApplications: (BOOL) theState {
+	_isAutoHideOtherApplications = theState;
+	[prefsController setAutoHideOtherApplications: theState];
+	if (theState)
+		[[NSApplication sharedApplication] hideOtherApplications: self];
+	else {
+		[[NSApplication sharedApplication] unhideAllApplications: self];
+		[window makeKeyAndOrderFront: self];
+	}
+}
+
+
+#pragma mark Termination stuff
 - (void)applicationWillTerminate:(NSNotification *)notification { //NSLog(@"%s", __PRETTY_FUNCTION__);
 	[window release];  [self release];
 } 
@@ -521,24 +544,6 @@ NSUInteger autoRepeatCounterAtStart;
 	[traceOD release]; [traceOS release]; [traceTrigger release];	[recInfoDict release];  [ergTime release];
 	[camera stopAndClose];	[camera release];
 	return NSTerminateNow;
-}
-
-
-- (void) setMenuBarVisible: (BOOL) theState {
-	_isMenuBarVisible = theState;
-	[prefsController setMenuBarVisible: theState];
-	[NSMenu setMenuBarVisible: theState];  [window setFrameTopLeftPoint: NSMakePoint(0, 9999)];
-}
-
-- (void) setAutoHideOtherApplications: (BOOL) theState {
-	_isAutoHideOtherApplications = theState;
-	[prefsController setAutoHideOtherApplications: theState];
-	if (theState)
-		[[NSApplication sharedApplication] hideOtherApplications: self];
-	else {
-		[[NSApplication sharedApplication] unhideAllApplications: self];
-		[window makeKeyAndOrderFront: self];
-	}
 }
 
 @end
