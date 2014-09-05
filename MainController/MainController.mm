@@ -96,7 +96,6 @@ NSUInteger autoRepeatCounterAtStart;
     [osci setIsShiftTraces: YES];
 	
 	traceOD = [[NSArray array] retain];  traceOS = [[NSArray array] retain];  traceTrigger = [[NSArray array] retain];
-	recInfoDict = [[NSMutableDictionary dictionaryWithCapacity: 20] retain];
 	
     [window makeKeyAndOrderFront: self];
 	infoPanel = [[EDGInfoPanel alloc] initWithMsg1: [NSString stringWithUTF8String: "Initialising stimulator…"] andMsg2: NULL];
@@ -299,41 +298,30 @@ NSUInteger autoRepeatCounterAtStart;
 
 # pragma mark Saving
 - (void) saveMeasurement {	//NSLog(@"%s", __PRETTY_FUNCTION__);
-	if (!doesRecordingNeedSaving) return;
-	
-	[recInfoDict setObject: [NSNumber numberWithInt: epNum] forKey: @kKeyEPNumber];
-	[recInfoDict setObject: @"ERG" forKey: @kKeyEPKey];
-	[recInfoDict setObject: [NSNumber numberWithInt: ergSequencer.stateInSequence] forKey: @kKeyStimNumber];
-	[recInfoDict setObject: [NSNumber numberWithInt: ergRepeatCount - 1] forKey: @kKeyBlockNumber];
-	[recInfoDict setObject: fieldSubjectName.stringValue forKey: @kKeySubjectName];
-	[recInfoDict setObject: fieldSubjectPIZ.stringValue forKey: @kKeySubjectPIZ];
-	[recInfoDict setObject: dateFieldBirthDate.dateValue forKey: @kKeyDateBorn];
-	[recInfoDict setObject: [NSNumber numberWithFloat: fieldAcuityOD.floatValue] forKey: @kKeyAcuityOD];
-	[recInfoDict setObject: [NSNumber numberWithFloat: fieldAcuityOS.floatValue] forKey: @kKeyAcuityOS];
-	[recInfoDict setObject: fieldReferrer.stringValue forKey: @kKeyDoctor];
-	[recInfoDict setObject: fieldDiagnosis.stringValue forKey: @kKeyDiagnosis];
-	[recInfoDict setObject: fieldRemark.stringValue forKey: @kKeyRemark];
-	[recInfoDict setObject: [NSString stringWithString: ergSequencer.stimName] forKey: @kKeyStimName];
-	[recInfoDict setObject: [NSString stringWithString: ergSequencer.stimNameISCEV4] forKey: @kKeyStimNameISCEV];
-	[recInfoDict setObject: [NSNumber numberWithFloat: ergStimulator.flashStrength] forKey: @kKeyFlashStrength];
-	[recInfoDict setObject: ergStimulator.flashLEDColor forKey: @kKeyFlashColor];
-	[recInfoDict setObject: [NSNumber numberWithFloat: ergStimulator.flashLEDDurationInSecs] forKey: @kKeyFlashDuration];
-	[recInfoDict setObject: [NSNumber numberWithFloat: ergStimulator.flashLEDLuminanceInCdPerMetersquare] forKey: @kKeyFlashLuminance];
-	[recInfoDict setObject: [NSNumber numberWithFloat: ergSequencer.flashFrequency] forKey: @kKeyStimFrequency];
-	
-	[recInfoDict setObject: [NSNumber numberWithFloat: ergStimulator.backgroundInCdPerMetersquare] forKey: @kKeyBackgroundLuminance];
-	[recInfoDict setObject: ergStimulator.backgroundColor forKey: @kKeyBackgroundColor];
-
+    if (!doesRecordingNeedSaving) return;
+    [ergSaving setEpNumber: epNum];
+    [ergSaving setStimNumber: ergSequencer.stateInSequence];
+    [ergSaving setBlockNumber: ergRepeatCount - 1];
+    [ergSaving setSubjectNameString: fieldSubjectName.stringValue];
+    [ergSaving setSubjectPIZString: fieldSubjectPIZ.stringValue];
+    [ergSaving setDateBorn: dateFieldBirthDate.dateValue];
+    [ergSaving setStimNameString: ergSequencer.stimName];
+    [ergSaving setStimNameISCEVString: ergSequencer.stimNameISCEV4];
+    [ergSaving setFlashStrength: ergStimulator.flashStrength];
+    [ergSaving setFlashLEDColorString: ergStimulator.flashLEDColor];
+    [ergSaving setFlashDuration: ergStimulator.flashLEDDurationInSecs];
+    [ergSaving setFlashLuminance: ergStimulator.flashLEDLuminanceInCdPerMetersquare];
+    [ergSaving setStimFrequency: ergSequencer.flashFrequency];
+    [ergSaving setBackgroundLuminance: ergStimulator.backgroundInCdPerMetersquare];
+    [ergSaving setBackgroundColorString: ergStimulator.backgroundColor];
     [ergSaving setAmplificationFactor: [prefsController amplificationFactor]];
-//    [recInfoDict setObject: [NSNumber numberWithFloat: prefsController.amplificationFactor] forKey: @kKeyAmplificationFactor];
-	[recInfoDict setObject: [NSNumber numberWithBool: [ergAmplifier isHardwareOk]] forKey: @kKeyisHardwareOk];
+    [ergSaving setIsHardwareOK: [ergAmplifier isHardwareOk]];
+    [ergSaving saveTracesOD: traceOD andOS: traceOS andFlash: traceTrigger];
 
-	[ergSaving saveTracesOD: traceOD andOS: traceOS andFlash: traceTrigger andDict: recInfoDict];
-
-	[prefsController setEPNumber: epNum];
-	//		[prefsController setSubjectname: [fieldSubjectName stringValue]];
-	doesRecordingNeedSaving = NO;
-    NSArray *guiElements = [[NSArray alloc] initWithObjects: buttonRetrievePIZ_outlet, fieldERGNumber, fieldSubjectName, fieldSubjectPIZ, dateFieldBirthDate, fieldAcuityOD, fieldAcuityOS, fieldReferrer, fieldDiagnosis, fieldRemark, nil];
+    [prefsController setEPNumber: epNum];
+    //		[prefsController setSubjectname: [fieldSubjectName stringValue]];
+    doesRecordingNeedSaving = NO;
+    NSArray *guiElements = [[NSArray alloc] initWithObjects: buttonRetrievePIZ_outlet, fieldERGNumber, fieldSubjectName, fieldSubjectPIZ, dateFieldBirthDate, fieldReferrer, fieldDiagnosis, fieldRemark, nil];
     for (id e in guiElements) [e setEnabled: NO];
     [guiElements release];
 }
@@ -424,12 +412,15 @@ NSUInteger autoRepeatCounterAtStart;
 	[self buttonsStandardEnabledState];
 }
 
+
 - (IBAction) buttonTimeReset: (id)sender {
 	[ergTime release];  ergTime = [[NSDate date] retain];
 }
-- (IBAction) buttonRetrievePIZ:(id)sender {	//	NSLog(@"buttonRetrievePIZ");
+
+
+- (IBAction) buttonRetrievePIZ:(id)sender {
 	PIZ2Patient *pIZ2Patient = [[PIZ2Patient alloc] init];
-    if ([pIZ2Patient retrieveViaPIZ:  fieldSubjectPIZ.intValue]) {	// 16042455
+    if ([pIZ2Patient retrieveViaPIZ:  fieldSubjectPIZ.intValue]) {
         fieldSubjectName.stringValue = pIZ2Patient.subjectName;  dateFieldBirthDate.dateValue = pIZ2Patient.subjectBirthdate;
     }
 	[pIZ2Patient release];
@@ -539,19 +530,22 @@ NSUInteger autoRepeatCounterAtStart;
 	[window release];  [self release];
 } 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)app {	//NSLog(@"%s", __PRETTY_FUNCTION__);
-	_isInAutoMode = NO;	// so auto-repeat timers (possibly active) will not run amok
-	// we don't ask for confirmation if we've done ≥ 2 flicker measurements
-	BOOL mayTerminate = ((([ergSequencer stateInSequence]+1) >= ([ergSequencer numberOfStates])) && (ergRepeatCount >= 1));
-	if (!mayTerminate)
-		mayTerminate = (NSRunAlertPanel(@"Do you really want to quit?", @"", @"No", @"Yes", NULL) == NSAlertAlternateReturn);
-	if (!mayTerminate)  return NSTerminateCancel;
-	// so now we will terminate, let's gracefully shutdown
-	[self saveMeasurement];  [ergSaving release];  [prefsController release];
-	[timer100Hz invalidate];  [timer100Hz release];  timer100Hz = nil;
-	[ergAmplifier release];  [ergStimulator release];
-	[traceOD release]; [traceOS release]; [traceTrigger release];	[recInfoDict release];  [ergTime release];
-	[camera stopAndClose];	[camera release];
-	return NSTerminateNow;
+    _isInAutoMode = NO;	// so auto-repeat timers (possibly active) will not run amok
+    // we don't ask for confirmation if we've done ≥ 2 flicker measurements
+    BOOL mayTerminate = ((([ergSequencer stateInSequence]+1) >= ([ergSequencer numberOfStates])) && (ergRepeatCount >= 1));
+    if (!mayTerminate)
+        mayTerminate = (NSRunAlertPanel(@"Do you really want to quit?", @"", @"No", @"Yes", NULL) == NSAlertAlternateReturn);
+    if (!mayTerminate)  return NSTerminateCancel;
+    // so now we will terminate, let's gracefully shutdown
+
+    [self saveMeasurement];  [ergSaving release];
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
+    [prefsController release];
+    [timer100Hz invalidate];  [timer100Hz release];  timer100Hz = nil;
+    [ergAmplifier release];  [ergStimulator release];
+    [traceOD release]; [traceOS release]; [traceTrigger release];  [ergTime release];
+    [camera stopAndClose];	[camera release];
+    return NSTerminateNow;
 }
 
 @end

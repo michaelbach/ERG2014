@@ -7,11 +7,12 @@
  */
 
 
-#define kCurrentVersionDate "2014-08-26"
+#define kCurrentVersionDate "2014-09-05"
 
 /*	History
 	=======
 
+2014-09-05  change parameter handover to saving not to use a dictionary
 2014-09-04  return value of retrieveViaPIZ is considered
 2014-08-01  switched to NI-Daq rather bTop, switched to Roland-Consult rather Toennies amplifiers
             has to stay in 32-bit mode because of NI

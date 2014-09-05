@@ -106,6 +106,7 @@ DQ
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="433" name="value" keyPath="self.ergSaving.remarkString" id="gbI-6P-uo4"/>
                                         <outlet property="nextKeyView" destination="344" id="853"/>
                                     </connections>
                                 </textField>
@@ -134,6 +135,7 @@ DQ
                                         <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     </textFieldCell>
                                     <connections>
+                                        <binding destination="433" name="value" keyPath="self.ergSaving.diagnosisString" id="5JT-Pf-hdy"/>
                                         <outlet property="nextKeyView" destination="336" id="851"/>
                                     </connections>
                                 </textField>
@@ -253,56 +255,9 @@ DQ
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     </datePickerCell>
                                     <connections>
-                                        <outlet property="nextKeyView" destination="367" id="858"/>
+                                        <outlet property="nextKeyView" destination="4IG-gl-Xid" id="BmF-WU-Rtz"/>
                                     </connections>
                                 </datePicker>
-                                <matrix toolTip="Acuities are preset at impossible values – so we know it when you forget to enter them…" verticalHuggingPriority="750" mode="track" allowsEmptySelection="NO" autosizesCells="NO" id="367">
-                                    <rect key="frame" x="120" y="133" width="88" height="22"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <size key="cellSize" width="44" height="22"/>
-                                    <textFieldCell key="prototype" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" tag="-1" drawsBackground="YES" id="1097">
-                                        <font key="font" metaFont="system"/>
-                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        <connections>
-                                            <outlet property="formatter" destination="358" id="1098"/>
-                                        </connections>
-                                    </textFieldCell>
-                                    <cells>
-                                        <column>
-                                            <textFieldCell scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" title="-1,0" drawsBackground="YES" id="350">
-                                                <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.000" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="." id="358">
-                                                    <attributedString key="attributedStringForZero">
-                                                        <fragment content="0,0"/>
-                                                    </attributedString>
-                                                    <decimal key="minimum" value="-1"/>
-                                                    <decimal key="maximum" value="3"/>
-                                                </numberFormatter>
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </textFieldCell>
-                                        </column>
-                                        <column>
-                                            <textFieldCell scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" tag="1" title="-1,0" drawsBackground="YES" id="368">
-                                                <numberFormatter key="formatter" formatterBehavior="10_0" positiveFormat="0.000" negativeFormat="-0.0" hasThousandSeparators="NO" thousandSeparator="." id="366">
-                                                    <attributedString key="attributedStringForZero">
-                                                        <fragment content="0,0"/>
-                                                    </attributedString>
-                                                    <decimal key="minimum" value="-1"/>
-                                                    <decimal key="maximum" value="3"/>
-                                                </numberFormatter>
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                            </textFieldCell>
-                                        </column>
-                                    </cells>
-                                    <connections>
-                                        <outlet property="nextKeyView" destination="978" id="979"/>
-                                    </connections>
-                                </matrix>
                                 <textField verticalHuggingPriority="750" id="352">
                                     <rect key="frame" x="120" y="158" width="88" height="13"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -336,6 +291,34 @@ DQ
                                     <connections>
                                         <binding destination="433" name="value" keyPath="self.epNum" id="ipg-Sn-Cub"/>
                                         <outlet property="nextKeyView" destination="349" id="848"/>
+                                    </connections>
+                                </textField>
+                                <textField toolTip="Identifier number of this session" verticalHuggingPriority="750" id="4IG-gl-Xid">
+                                    <rect key="frame" x="122" y="133" width="42" height="22"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="IdK-wO-Ntb">
+                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="90d-Tx-za6"/>
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="433" name="value" keyPath="ergSaving.acuityOD" id="TsG-pJ-4Bx"/>
+                                        <outlet property="nextKeyView" destination="2aR-Ax-F6p" id="vhH-CA-LKg"/>
+                                    </connections>
+                                </textField>
+                                <textField toolTip="Identifier number of this session" verticalHuggingPriority="750" id="2aR-Ax-F6p">
+                                    <rect key="frame" x="166" y="133" width="42" height="22"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" drawsBackground="YES" id="38t-kJ-yjo">
+                                        <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" minimumIntegerDigits="1" maximumIntegerDigits="309" maximumFractionDigits="3" id="I9d-cy-gDW"/>
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" white="0.75" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </textFieldCell>
+                                    <connections>
+                                        <binding destination="433" name="value" keyPath="ergSaving.acuityOS" id="JP6-bL-nUC"/>
+                                        <outlet property="nextKeyView" destination="978" id="obp-Uc-1iV"/>
                                     </connections>
                                 </textField>
                                 <textField toolTip="Amplification Factor (change in preferences file)" verticalHuggingPriority="750" id="M1i-vq-UsK">
@@ -476,6 +459,7 @@ DQ
                                         <color key="backgroundColor" red="0.76078432799999995" green="0.76078432799999995" blue="0.76078432799999995" alpha="1" colorSpace="deviceRGB"/>
                                     </comboBoxCell>
                                     <connections>
+                                        <binding destination="433" name="value" keyPath="self.ergSaving.referrerString" id="VgT-te-EMR"/>
                                         <outlet property="dataSource" destination="433" id="982"/>
                                         <outlet property="delegate" destination="433" id="983"/>
                                         <outlet property="nextKeyView" destination="338" id="980"/>
@@ -1279,9 +1263,7 @@ DQ
                 <outlet property="buttonRecord_outlet" destination="326" id="1179"/>
                 <outlet property="buttonRetrievePIZ_outlet" destination="889" id="1189"/>
                 <outlet property="checkboxInfraredOn_outlet" destination="1202" id="1207"/>
-                <outlet property="dateFieldBirthDate" destination="349" id="832"/>
-                <outlet property="fieldAcuityOD" destination="350" id="833"/>
-                <outlet property="fieldAcuityOS" destination="368" id="834"/>
+                <outlet property="dateFieldBirthDate" destination="349" id="Yhi-Qs-bzj"/>
                 <outlet property="fieldBackgroundColor" destination="1107" id="1112"/>
                 <outlet property="fieldBackgroundLum" destination="490" id="497"/>
                 <outlet property="fieldDiagnosis" destination="338" id="830"/>
@@ -1289,7 +1271,6 @@ DQ
                 <outlet property="fieldFlashColor" destination="1109" id="1111"/>
                 <outlet property="fieldFlashFreq" destination="1162" id="1166"/>
                 <outlet property="fieldFlashStrength" destination="487" id="1113"/>
-                <outlet property="fieldReferrer" destination="978" id="981"/>
                 <outlet property="fieldRemark" destination="336" id="831"/>
                 <outlet property="fieldStimNameISCEV" destination="1117" id="1119"/>
                 <outlet property="fieldSubjectName" destination="344" id="827"/>

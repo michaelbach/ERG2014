@@ -11,8 +11,29 @@
 
 @implementation Saving
 
-
+@synthesize isHardwareOK;
 @synthesize amplificationFactor;
+@synthesize acuityOD;
+@synthesize acuityOS;
+@synthesize flashStrength;
+@synthesize flashDuration;
+@synthesize flashLuminance;
+@synthesize stimFrequency;
+@synthesize backgroundLuminance;
+@synthesize epNumber;
+@synthesize stimNumber;
+@synthesize blockNumber;
+
+@synthesize subjectNameString;
+@synthesize subjectPIZString;
+@synthesize referrerString;
+@synthesize diagnosisString;
+@synthesize remarkString;
+@synthesize stimNameString;
+@synthesize stimNameISCEVString;
+@synthesize flashLEDColorString;
+@synthesize backgroundColorString;
+@synthesize dateBorn;
 
 
 ///// first internal-only functions
@@ -35,12 +56,18 @@
 
 - (id) init {
 	if ((self = [super init])) {	// NSLog(@"ERG2007>Saving>init\n");
+        subjectNameString = @"";
+        subjectPIZString = @"";
+        referrerString = @"";
+        diagnosisString = @"";
+        remarkString = @"";
 	}
 	return self;
 }
 
 
 - (void) dealloc {	//	NSLog(@"ERG2007>Saving>dealloc\n");
+    [[NSNotificationCenter defaultCenter] removeObserver: self];
 	[super dealloc];
 }
 
@@ -85,22 +112,19 @@
 }
 
 
-- (void) saveTracesOD: (NSArray *) tOD andOS: (NSArray *) tOS andFlash: (NSArray *) tFlash andDict: (NSDictionary *) d {	//	NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void) saveTracesOD: (NSArray *) tOD andOS: (NSArray *) tOS andFlash: (NSArray *) tFlash {	//	NSLog(@"%s", __PRETTY_FUNCTION__);
 	// if hardware is missing, we are in demo mode, and can't detect the flash time anyway.
-	CGFloat timeOfFlash = [[d objectForKey: @kKeyisHardwareOk] boolValue] ? [self detectFlashTime: tFlash] : 0;
+	CGFloat timeOfFlash = isHardwareOK ? [self detectFlashTime: tFlash] : 0;
 	//	NSLog(@"timeOfFlash: %d", (NSInteger)timeOfFlash);
 	
-	NSInteger epNum = [[d objectForKey: @kKeyEPNumber] intValue];
-	NSMutableString *ergFileString = [NSMutableString stringWithContentsOfFile: [self pathToERGFileGivenEPNum: epNum] encoding:NSMacOSRomanStringEncoding error: NULL];
+	NSMutableString *ergFileString = [NSMutableString stringWithContentsOfFile: [self pathToERGFileGivenEPNum: epNumber] encoding:NSMacOSRomanStringEncoding error: NULL];
 	if (ergFileString.length <1) {
 		ergFileString = [NSMutableString stringWithCapacity: 10000]; [ergFileString appendString: @"IGOR\n"];
 	}
-	NSInteger blockNum = [[d objectForKey: @kKeyBlockNumber] intValue];//	NSLog(@"saveTraces, block: %d", blockNum);
-	NSInteger stimNum = [[d objectForKey: @kKeyStimNumber] intValue];	//	NSLog(@"saveTraces, stimNum: %d", stimNum);
 	NSString *waveOD, *waveOS, *waveFlash;
-	waveOD = [self composeWaveNameFromBlockNum: blockNum andStimNum: stimNum andChannel: 0];
-	waveOS = [self composeWaveNameFromBlockNum: blockNum andStimNum: stimNum andChannel: 1];
-	waveFlash = [self composeWaveNameFromBlockNum: blockNum andStimNum: stimNum andChannel: 2];
+	waveOD = [self composeWaveNameFromBlockNum: blockNumber andStimNum: stimNumber andChannel: 0];
+	waveOS = [self composeWaveNameFromBlockNum: blockNumber andStimNum: stimNumber andChannel: 1];
+	waveFlash = [self composeWaveNameFromBlockNum: blockNumber andStimNum: stimNumber andChannel: 2];
 	NSArray *waveNameArray = [NSArray arrayWithObjects: waveOD, waveOS, waveFlash, nil];
 
 	[ergFileString appendString: @"WAVES /O "];
@@ -128,51 +152,52 @@
 	for (NSUInteger i=0; i<(waveNameArray.count-1); ++i) {	// we don't need these details for the highest channel, which contains the trigger, so "count-1"
 		NSString *ws = [waveNameArray objectAtIndex: i];
 		[ergFileString appendFormat: @"X note %@, \"%s:%@;", ws, kKeyVersion, @kCurrentVersionDate];
-		[ergFileString appendFormat: @"%s:%ld;", kKeyEPNumber, (long)epNum];
-		[ergFileString appendFormat: @"%s:%ld;", kKeyBlockNumber, (long)blockNum];
-		[ergFileString appendFormat: @"%s:%ld;", kKeyStimNumber, (long)stimNum];
+		[ergFileString appendFormat: @"%s:%ld;", kKeyEPNumber, (long)epNumber];
+		[ergFileString appendFormat: @"%s:%ld;", kKeyBlockNumber, (long)blockNumber];
+		[ergFileString appendFormat: @"%s:%ld;", kKeyStimNumber, (long)stimNumber];
 		[ergFileString appendFormat: @"%s:%lu;", kKeyChannel, (unsigned long)i];
 		[ergFileString appendFormat: @"%s:%@;", kKeyDateRecording, [Misc date2YYYY_MM_DD: NSDate.date]];
 		[ergFileString appendFormat: @"%s:%@;", kKeyTimeRecording, [Misc date2HH_MM_SSdotted: NSDate.date]];
 
 		[ergFileString appendFormat: @"\"\nX note %@, \";", ws];
-		[ergFileString appendFormat: @"%s:%@;", kKeySubjectName, [[d objectForKey: @kKeySubjectName] description]];
-		[ergFileString appendFormat: @"%s:%@;", kKeyDateBorn, [Misc date2YYYY_MM_DD: [d objectForKey: @kKeyDateBorn]]];
-		[ergFileString appendFormat: @"%s:%d;", kKeySubjectPIZ, [[d objectForKey: @kKeySubjectPIZ] intValue]];
-		[ergFileString appendFormat: @"%s:%g;", kKeyAcuityOD, [[d objectForKey: @kKeyAcuityOD] floatValue]];
-		[ergFileString appendFormat: @"%s:%g;\"\n", kKeyAcuityOS, [[d objectForKey: @kKeyAcuityOS] floatValue]];
+		[ergFileString appendFormat: @"%s:%@;", kKeySubjectName, subjectNameString];
+		[ergFileString appendFormat: @"%s:%@;", kKeyDateBorn, [Misc date2YYYY_MM_DD: dateBorn]];
+		[ergFileString appendFormat: @"%s:%@;", kKeySubjectPIZ, subjectPIZString];
+		[ergFileString appendFormat: @"%s:%g;", kKeyAcuityOD, acuityOD];
+		[ergFileString appendFormat: @"%s:%g;", kKeyAcuityOS, acuityOS];
+		[ergFileString appendString: @"\"\n"];
 
-		[ergFileString appendFormat: @"X note %@, \";%s:%@;", ws, kKeyDoctor, [[d objectForKey: @kKeyDoctor] description]];
-		[ergFileString appendFormat: @"%s:%@;", kKeyDiagnosis, [[d objectForKey: @kKeyDiagnosis] description]];
-		[ergFileString appendFormat: @"%s:%@;\"\n", kKeyRemark, [[d objectForKey: @kKeyRemark] description]];
+		[ergFileString appendFormat: @"X note %@, \";%s:%@;", ws, kKeyDoctor, referrerString];
+		[ergFileString appendFormat: @"%s:%@;", kKeyDiagnosis, diagnosisString];
+		[ergFileString appendFormat: @"%s:%@;\"\n", kKeyRemark, remarkString];
 
 #ifdef versionTinaTsai
 		[ergFileString appendFormat: @"X note %@, \";%s:%s;", ws, kKeyEyeKey, i==0 ? "OD" : "OU"]; // "OS" –> "OU"
-		[ergFileString appendFormat: @"%s:%@;", kKeyEPKey, i==0 ? [[d objectForKey: @kKeyEPKey] description] : @"VEP"];	//  "VEP"
+		[ergFileString appendFormat: @"%s:%@;", kKeyEPKey, @"VEP"];
 #else
 		[ergFileString appendFormat: @"X note %@, \";%s:%s;", ws, kKeyEyeKey, i==0 ? "OD" : "OS"];
-		[ergFileString appendFormat: @"%s:%@;", kKeyEPKey, [[d objectForKey: @kKeyEPKey] description]];
+		[ergFileString appendFormat: @"%s:%@;", kKeyEPKey, @"ERG"];
 #endif
 		[ergFileString appendString: @"nSweeps:1;"];
 
 		[ergFileString appendFormat: @"\"\nX note %@, \";", ws];
-		[ergFileString appendFormat: @"%s:%@;", kKeyStimName, [[d objectForKey: @kKeyStimName] description]];
-		[ergFileString appendFormat: @"%s:%@;", kKeyStimNameISCEV, [[d objectForKey: @kKeyStimNameISCEV] description]];
-		[ergFileString appendFormat: @"%s:%g;", kKeyFlashStrength, [[d objectForKey: @kKeyFlashStrength] floatValue]];
-		[ergFileString appendFormat: @"%s:%@;", kKeyFlashColor, [[d objectForKey: @kKeyFlashColor] description]];
-		[ergFileString appendFormat: @"%s:%g;", kKeyFlashDuration, [[d objectForKey: @kKeyFlashDuration] floatValue]];
-		[ergFileString appendFormat: @"%s:%g;", kKeyFlashLuminance, [[d objectForKey: @kKeyFlashLuminance] floatValue]];
-		[ergFileString appendFormat: @"%s:%g;", kKeyStimFrequency, [[d objectForKey: @kKeyStimFrequency] floatValue]];
+		[ergFileString appendFormat: @"%s:%@;", kKeyStimName, stimNameString];
+		[ergFileString appendFormat: @"%s:%@;", kKeyStimNameISCEV, stimNameISCEVString];
+		[ergFileString appendFormat: @"%s:%g;", kKeyFlashStrength, flashStrength];
+		[ergFileString appendFormat: @"%s:%@;", kKeyFlashColor, flashLEDColorString];
+		[ergFileString appendFormat: @"%s:%g;", kKeyFlashDuration, flashDuration];
+		[ergFileString appendFormat: @"%s:%g;", kKeyFlashLuminance, flashLuminance];
+		[ergFileString appendFormat: @"%s:%g;", kKeyStimFrequency, stimFrequency];
 
 		[ergFileString appendFormat: @"\"\nX note %@, \";", ws];
-		[ergFileString appendFormat: @"%s:%g;", kKeyBackgroundLuminance, [[d objectForKey: @kKeyBackgroundLuminance] floatValue]];
-		[ergFileString appendFormat: @"%s:%@;", kKeyBackgroundColor, [[d objectForKey: @kKeyBackgroundColor] description]];
+		[ergFileString appendFormat: @"%s:%g;", kKeyBackgroundLuminance, backgroundLuminance];
+		[ergFileString appendFormat: @"%s:%@;", kKeyBackgroundColor, backgroundColorString];
 		[ergFileString appendFormat: @"\"\n"];
 	}	
 	[ergFileString appendString: @"\n\n"];
 	
 	//BOOL result = [ergFileString writeToFile: [self pathToERGFileGivenEPNum: epNum] atomically:YES encoding:NSMacOSRomanStringEncoding error: NULL];
-	NSString *path = [NSString stringWithString: [self pathToERGFileGivenEPNum: epNum]];
+	NSString *path = [NSString stringWithString: [self pathToERGFileGivenEPNum: epNumber]];
 	BOOL result = [ergFileString writeToFile: path atomically:YES encoding:NSMacOSRomanStringEncoding error: NULL];
 	if (!result)
 		NSRunAlertPanel(@"Alert:", @"Recording could not be written to disk.", @"OK", NULL, NULL);

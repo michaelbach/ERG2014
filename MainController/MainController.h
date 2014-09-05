@@ -26,10 +26,9 @@
 	IBOutlet Oscilloscope3 *osci;
 	IBOutlet NSTextField *fieldSubjectName, *fieldSubjectPIZ, *fieldERGNumber;
 	IBOutlet NSDatePicker *dateFieldBirthDate;
-	IBOutlet NSTextFieldCell *fieldAcuityOD, *fieldAcuityOS;
 	IBOutlet NSComboBox *fieldReferrer;
 	IBOutlet NSTextField *fieldDiagnosis, *fieldRemark;
-	IBOutlet NSTextField *fieldFlashStrength, *fieldFlashFreq, *fieldFlashColor, *fieldBackgroundLum, *fieldBackgroundColor, *fieldRepeatCount;
+	IBOutlet NSTextField *fieldFlashStrength, *fieldFlashFreq, *fieldFlashColor, *fieldBackgroundLum, *fieldBackgroundColor;
 	IBOutlet NSTextField *fieldTimeDisplay;
 	IBOutlet NSTextField *fieldStimNameISCEV;
 	IBOutlet QTCaptureView	*mCaptureView;	// VideoIn -> View
@@ -53,7 +52,6 @@
 	PrefsController *prefsController;
 	Sequencer* ergSequencer;
 	Saving *ergSaving;
-	NSMutableDictionary *recInfoDict;
     ReferrerNames *referrerNames;
 	NSMutableArray *traceBoxesOD, *traceBoxesOS;
 }
