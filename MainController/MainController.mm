@@ -93,11 +93,12 @@ NSUInteger autoRepeatCounterAtStart;
 	[osci setColor: [NSColor colorWithDeviceRed:0.5 green:0 blue:0.0 alpha: 1] forTrace: 1];
 	[osci setColor: NSColor.darkGrayColor forTrace: 2];
 	[osci setBackgroundColor: NSColor.lightGrayColor];
-    [osci setIsShiftTraces: NO];
+    [osci setIsShiftTraces: YES];
 	
 	traceOD = [[NSArray array] retain];  traceOS = [[NSArray array] retain];  traceTrigger = [[NSArray array] retain];
 	recInfoDict = [[NSMutableDictionary dictionaryWithCapacity: 20] retain];
 	
+    [window makeKeyAndOrderFront: self];
 	infoPanel = [[EDGInfoPanel alloc] initWithMsg1: [NSString stringWithUTF8String: "Initialising stimulator…"] andMsg2: NULL];
 	ergStimulator = [[Q450Stim alloc] init];  
 	[ergStimulator setInfraredIllumination: YES];  [checkboxInfraredOn_outlet setState:([ergStimulator infraredIllumination] ? 1 : 0)];
@@ -230,7 +231,9 @@ NSUInteger autoRepeatCounterAtStart;
 	if (in100Handler) {
         [timerWaitNoOsci release];
         NSLog(@"wait in initMeasurement (timered)");
-            timerWaitNoOsci = [[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(handleTimerWaitNoOsci:) userInfo: nil repeats: NO] retain];
+        // besser wäre hier:
+        [self performSelector: @selector(initMeasurement) withObject: nil afterDelay: 0.002];
+        //timerWaitNoOsci = [[NSTimer scheduledTimerWithTimeInterval: 0.001 target: self selector: @selector(handleTimerWaitNoOsci:) userInfo: nil repeats: NO] retain];
         return;
     }
 	isDoingSweepAcquisition = YES;	// tell the oscilloscope to pause
@@ -364,10 +367,12 @@ NSUInteger autoRepeatCounterAtStart;
 }
 - (void) oneStepOfAutoRecordingTimer {
 	if (!_isInAutoMode) return;
-/*    if ((ergRepeatCount == 5) || (ergRepeatCount == 15)) {
-        [camera setStillImageFilePathName: [NSString stringWithFormat: @"%@/%@%03u-%02u", [Misc pathOfApplicationContainer], [Misc epNum2fullString: epNum], ergSequencer.stateInSequence+1, ergRepeatCount]];
+#ifndef versionAnimal
+    if ((ergRepeatCount == 5) || (ergRepeatCount == 15)) {
+        [camera setStillImageFilePath: [NSString stringWithFormat: @"%@/%@%03u-%02u", [Misc pathOfApplicationContainer], [Misc epNum2fullString: epNum], ergSequencer.stateInSequence+1, ergRepeatCount]];
         [camera takeStillImage];
-    } */
+    }
+#endif
 	[self initMeasurement];
     [self setAutoRecordRepeatCount: autoRecordRepeatCount - 1];
 	if ((ergRepeatCount >= (NSUInteger) kMaxRepetitionsPerStimulus) || (autoRecordRepeatCount <= 0))
@@ -423,8 +428,10 @@ NSUInteger autoRepeatCounterAtStart;
 	[ergTime release];  ergTime = [[NSDate date] retain];
 }
 - (IBAction) buttonRetrievePIZ:(id)sender {	//	NSLog(@"buttonRetrievePIZ");
-	PIZ2Patient *pIZ2Patient = [[PIZ2Patient alloc] init];  [pIZ2Patient retrieveViaPIZ:  fieldSubjectPIZ.intValue];	// 16042455
-	fieldSubjectName.stringValue = pIZ2Patient.subjectName;  dateFieldBirthDate.dateValue = pIZ2Patient.subjectBirthdate;
+	PIZ2Patient *pIZ2Patient = [[PIZ2Patient alloc] init];
+    if ([pIZ2Patient retrieveViaPIZ:  fieldSubjectPIZ.intValue]) {	// 16042455
+        fieldSubjectName.stringValue = pIZ2Patient.subjectName;  dateFieldBirthDate.dateValue = pIZ2Patient.subjectBirthdate;
+    }
 	[pIZ2Patient release];
 }
 
@@ -438,7 +445,7 @@ NSUInteger autoRepeatCounterAtStart;
 
 
 - (IBAction) buttonFoto: (id)sender {   //NSLog(@"%s", __PRETTY_FUNCTION__);
-    [camera setStillImageFilePathName: [NSString stringWithFormat: @"%@/%@%@", [Misc pathOfApplicationContainer], [Misc epNum2fullString: epNum], [Misc date2HH_MM_SSdotted: [NSDate date]]]];
+    [camera setStillImageFilePath: [NSString stringWithFormat: @"%@/%@%@", [Misc pathOfApplicationContainer], [Misc epNum2fullString: epNum], [Misc date2HH_MM_SSdotted: [NSDate date]]]];
 	[camera takeStillImage];
 }
 

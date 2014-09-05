@@ -12,6 +12,7 @@
 /*	History
 	=======
 
+2014-09-04  return value of retrieveViaPIZ is considered
 2014-08-01  switched to NI-Daq rather bTop, switched to Roland-Consult rather Toennies amplifiers
             has to stay in 32-bit mode because of NI
             different amplification calibration concept (rely on RC amplfactor, rely on NI amplfactor)
@@ -132,8 +133,8 @@ defaults write com.apple.xcode PBXCustomTemplateMacroDefinitions '{ORGANIZATIONN
 */
 
 
-//  #define versionEDIAG
-#define versionAnimal
+#define versionEDIAG
+//  #define versionAnimal
 //	#define versionTinaTsai
 
 
